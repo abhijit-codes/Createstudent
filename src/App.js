@@ -10,9 +10,9 @@ import { ShowUser } from "./features/userdetailsSlice";
 
 function App() {
   const dispatch= useDispatch();
-  // useEffect(() => {
-  //     dispatch(ShowUser());
-  //   }, [dispatch]);
+  useEffect(() => {
+      dispatch(ShowUser());
+    }, [dispatch]);
   return (
     <div className="App">
       <Navbar/>
