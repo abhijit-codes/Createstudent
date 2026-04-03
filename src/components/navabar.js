@@ -6,34 +6,25 @@ import { searchUser } from "../features/userdetailsSlice";
 
 const Navabar = () => {
   const allusers = useSelector((state) => state.app.users);
-  const dispatch =useDispatch();
+  const dispatch = useDispatch();
   const [searchData, setsearchData] = useState("");
-  useEffect(()=>{
+
+  useEffect(() => {
     dispatch(searchUser(searchData));
-  },[searchData]);
+  }, [searchData, dispatch]); // ✅ FIX
 
-
-
-
-  
   const navigate = useNavigate();
+
   return (
-    <Navbar bg="light" expand="lg">
-      <Container className="d-flex justify-content-between align-items-center">
-        <div className="d-flex gap-2">
-          <Button variant="outline-primary">RTK</Button>
-          <Button variant="outline-secondary" onClick={() => navigate("/")}>
-            Add STUDENT
-          </Button>
-          <Button variant="outline-success" onClick={() => navigate("/read")}>
-            ALL STUDENT({allusers.length})
-          </Button>
-        </div>
+    <Navbar bg="light">
+      <Container>
+        <Button onClick={() => navigate("/")}>Add</Button>
+        <Button onClick={() => navigate("/read")}>
+          All ({allusers.length})
+        </Button>
 
-        <Navbar.Brand className="mx-auto">Class Name</Navbar.Brand>
-
-        <Form className="d-flex ms-auto">
-          <FormControl type="search" placeholder="Search" className="me-2" onChange={(e)=>(setsearchData(e.target.value))} />
+        <Form>
+          <FormControl onChange={(e) => setsearchData(e.target.value)} />
         </Form>
       </Container>
     </Navbar>
